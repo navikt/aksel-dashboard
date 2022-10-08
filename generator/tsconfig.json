@@ -8,10 +8,9 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
-    "lib": ["es2018"],
+    "lib": ["es2018", "DOM", "DOM.Iterable"],
     "module": "commonjs",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
@@ -19,5 +18,5 @@
     "pretty": true,
     "target": "es2018"
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "build"]
 }
