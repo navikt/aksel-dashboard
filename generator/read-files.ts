@@ -13,15 +13,30 @@ export const getDirs = () =>
     return dirs;
   });
 
+const readTSJS = async () => {
+  const dirs = await getDirs();
+  const res = [];
+
+  for (const r of dirs) {
+    const files = await fglob(
+      [
+        `${r}/**/*.{tsx,jsx}`,
+        "!**/node_modules/**",
+        `!**/*.(spec|test|stories|story).*`,
+      ],
+      {
+        dot: true,
+        concurrency: 5,
+      }
+    );
+    res.push({ src: r, files });
+  }
+  return res;
+};
+
 export const readFiles = async () => {
   const dirs = await getDirs();
   console.log(`Directories: ${dirs.length}`);
-};
 
-// const files = await fglob(
-//   [`**/package.json`, "!**/node_modules/**", `!**/*.(spec|test).*`],
-//   {
-//     dot: true,
-//     concurrency: 5,
-//   }
-// );
+  return { ts: await readTSJS() };
+};

@@ -43,7 +43,9 @@
     "@octokit/plugin-paginate-rest": "4.3.1",
     "simple-git": "3.14.1",
     "fast-glob": "3.2.12",
-    "semver": "7.3.8"
+    "semver": "7.3.8",
+    "ts-morph": "16.0.0",
+    "react-scanner": "1.1.0"
   },
   "prettier": {}
 }
