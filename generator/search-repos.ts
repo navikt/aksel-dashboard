@@ -16,9 +16,9 @@ export type RepoT = {
   pushed_at?: Date;
 };
 
-export const searchForRepos = async () => {
-  const octokit = Octokit.plugin(paginateRest);
+const octokit = Octokit.plugin(paginateRest);
 
+export const searchForRepos = async () => {
   const MyOctokit = new octokit({
     auth: process.env.TOKEN,
     userAgent: "Aksel Dashboard",
@@ -58,5 +58,6 @@ export const searchForRepos = async () => {
             (1000 * 3600 * 24)
         ) < config.lastUpdated
       );
-    });
+    })
+    .filter((v, i, a) => a.findIndex((v2) => v2.name === v.name) === i);
 };

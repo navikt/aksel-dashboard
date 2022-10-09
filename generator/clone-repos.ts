@@ -2,7 +2,7 @@ import fs from "fs";
 import simpleGit from "simple-git";
 import { RepoT } from "./search-repos";
 
-const repoLocation = "generator/repos";
+const repoLocation = "./repos";
 
 export const cloneRepos = async (repos: RepoT[]) => {
   !fs.existsSync(repoLocation) && fs.mkdirSync(repoLocation);
