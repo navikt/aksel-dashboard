@@ -1,7 +1,6 @@
 import fglob from "fast-glob";
-import { filterBasedOnPackage, getPackageJsons } from "./filter-repos.js";
 
-const getDirs = () =>
+export const getDirs = () =>
   fglob(`repos/*`, {
     onlyFiles: false,
     deep: 1,
@@ -16,13 +15,9 @@ const getDirs = () =>
 
 export const readFiles = async () => {
   const dirs = await getDirs();
-  const packageJsons = await getPackageJsons(dirs);
-  await filterBasedOnPackage(packageJsons);
-
-  /* console.log(packageJsons); */
+  console.log(`Directories: ${dirs.length}`);
 };
 
-//
 // const files = await fglob(
 //   [`**/package.json`, "!**/node_modules/**", `!**/*.(spec|test).*`],
 //   {

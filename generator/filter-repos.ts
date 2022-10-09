@@ -2,6 +2,7 @@ import fglob from "fast-glob";
 import fs from "fs/promises";
 import fsSync from "fs";
 import semver from "semver";
+import { getDirs } from "./read-files.js";
 
 export const getPackageJsons = async (dirs: string[]) => {
   const res = [];
@@ -69,4 +70,10 @@ export const filterBasedOnPackage = async (
       fsSync.rmSync(opt.src, { force: true, recursive: true });
     }
   }
+};
+
+export const filterRepos = async () => {
+  const dirs = await getDirs();
+  const packageJsons = await getPackageJsons(dirs);
+  await filterBasedOnPackage(packageJsons);
 };
