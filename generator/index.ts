@@ -1,7 +1,7 @@
 import console from "console";
 import * as dotenv from "dotenv";
-import { cloneRepos } from "./clone-repos";
-import { searchForRepos } from "./search-repos";
+import { cloneRepos } from "./clone-repos.js";
+import { searchForRepos } from "./search-repos.js";
 dotenv.config({ path: "../.env" });
 
 const validateTokens = () => {
@@ -11,10 +11,14 @@ const validateTokens = () => {
 };
 
 const main = async () => {
-  const repos = await searchForRepos();
-  cloneRepos(repos.slice(0, 10));
+  if (process.env.FULL) {
+    const repos = await searchForRepos();
+    await cloneRepos(repos);
+    console.log(`Repos: ${repos.length}`);
+  } else {
+    console.log("Skipped cloning");
+  }
 
-  console.log(`Repos: ${repos.length}`);
   console.log("Done");
 };
 

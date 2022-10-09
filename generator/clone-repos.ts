@@ -1,6 +1,6 @@
 import fs from "fs";
 import simpleGit from "simple-git";
-import { RepoT } from "./search-repos";
+import { RepoT } from "./search-repos.js";
 
 const repoLocation = "./repos";
 
@@ -12,7 +12,7 @@ export const cloneRepos = async (repos: RepoT[]) => {
     binary: "git",
     maxConcurrentProcesses: 10,
   });
-
+  console.log("Cloning repos");
   await Promise.all(
     repos.map((repo) =>
       git.clone(
