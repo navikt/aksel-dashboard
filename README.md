@@ -17,3 +17,11 @@ Dashboard for tracking for hvordan Aksel sine løsninge blir brukt.
 ### App
 
 ...
+
+## Tokens
+
+.env på root
+
+```
+TOKEN=[git-token]
+```
