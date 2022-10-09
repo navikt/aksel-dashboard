@@ -1,16 +1,12 @@
 import { Octokit } from "@octokit/core";
 import { paginateRest } from "@octokit/plugin-paginate-rest";
 
-const octokit = Octokit.plugin(paginateRest);
-
 const config = {
   code: "ds-react",
   file: "package.json",
   org: "navikt",
   lastUpdated: 180,
 };
-
-const searchString = `${config.code}+filename:${config.file}+user:${config.org}`;
 
 type RepoT = {
   id: number;
@@ -20,7 +16,9 @@ type RepoT = {
   pushed_at: Date;
 };
 
-export const searchRepos = async () => {
+export const searchForRepos = async (): Promise<Partial<RepoT>[]> => {
+  const octokit = Octokit.plugin(paginateRest);
+
   const MyOctokit = new octokit({
     auth: process.env.TOKEN,
     userAgent: "Aksel Dashboard",
@@ -28,7 +26,7 @@ export const searchRepos = async () => {
 
   const res = await MyOctokit.paginate("GET /search/code", {
     per_page: 100,
-    q: searchString,
+    q: `${config.code}+filename:${config.file}+user:${config.org}`,
   }).then((r) => r?.map(({ repository: { id, name } }) => ({ id, name })));
 
   const allRepos = await MyOctokit.paginate("GET /orgs/navikt/repos", {

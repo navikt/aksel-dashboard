@@ -1,7 +1,6 @@
 import console from "console";
 import * as dotenv from "dotenv";
-import { searchRepos } from "./git";
-
+import { searchForRepos } from "./search-repos";
 dotenv.config({ path: "../.env" });
 
 const validateTokens = () => {
@@ -11,10 +10,10 @@ const validateTokens = () => {
 };
 
 const main = async () => {
-  await searchRepos();
+  const repos = await searchForRepos();
 
-  console.log("Completed");
-  return null;
+  console.log(`Repos: ${repos.length}`);
+  console.log("Done");
 };
 
 try {

@@ -8,10 +8,10 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .ts",
-    "clean": "gts clean",
+    "clean": "cd generator && gts clean",
     "test": "cd generator && jest",
-    "g:dev": "cd generator &&  tsc -w",
-    "g:build": "cd generator &&  tsc",
+    "g:dev": "yarn clean && cd generator &&  tsc -w",
+    "g:build": "yarn clean && cd generator &&  tsc",
     "g:run": "cd generator && node --experimental-specifier-resolution=node ./build/index.js",
     "prepare": "husky install"
   },
