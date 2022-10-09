@@ -13,7 +13,6 @@ const config = {
     imported: string;
     moduleName: string;
   }) => imported || path.basename(moduleName),
-  includeSubComponents: true,
 };
 
 export const walkTs = async () => {
@@ -36,12 +35,4 @@ export const walkTs = async () => {
     importedFrom: /@navikt\/ds-icons/,
     processors: [["count-components", { outputTo: "out/icons.json" }]],
   });
-
-  /*   data.forEach((x) => {
-    x.files.forEach((file) => {
-      const project = new Project();
-      const sourceFile = project.addSourceFileAtPath(file);
-      console.log(sourceFile.getChildren().map(x => x.name));
-    });
-  }); */
 };

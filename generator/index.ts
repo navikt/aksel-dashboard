@@ -20,6 +20,7 @@ const main = async () => {
   } else {
     console.log("Skipped cloning");
   }
+
   await filterRepos();
   await walkTs();
 
