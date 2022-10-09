@@ -8,15 +8,15 @@ const config = {
   lastUpdated: 180,
 };
 
-type RepoT = {
+export type RepoT = {
   id: number;
   name: string;
-  archived: boolean;
-  disabled: boolean;
-  pushed_at: Date;
+  archived?: boolean;
+  disabled?: boolean;
+  pushed_at?: Date;
 };
 
-export const searchForRepos = async (): Promise<Partial<RepoT>[]> => {
+export const searchForRepos = async () => {
   const octokit = Octokit.plugin(paginateRest);
 
   const MyOctokit = new octokit({
@@ -44,7 +44,7 @@ export const searchForRepos = async (): Promise<Partial<RepoT>[]> => {
   /* Filter out unwanted repos */
   return res
     .map(({ id, ...r }) => {
-      return { ...r, ...allRepos.find((x) => x.id === id) };
+      return { ...r, id, ...allRepos.find((x) => x.id === id) };
     })
     .filter((x) => !x.disabled && !x.archived)
     .filter((x) => {
