@@ -1,6 +1,7 @@
 import console from "console";
 import * as dotenv from "dotenv";
 import { cloneRepos } from "./clone-repos.js";
+import { readFiles } from "./read-files.js";
 import { searchForRepos } from "./search-repos.js";
 dotenv.config({ path: "../.env" });
 
@@ -19,7 +20,9 @@ const main = async () => {
     console.log("Skipped cloning");
   }
 
-  console.log("Done");
+  await readFiles();
+
+  console.log("\nDone");
 };
 
 try {

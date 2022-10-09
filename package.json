@@ -25,6 +25,7 @@
     "@typescript-eslint/parser": "^5.39.0",
     "@types/node": "^14.11.2",
     "@types/react": "^18.0.17",
+    "@types/semver": "7.3.12",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.1.0",
     "autoprefixer": "^10.4.12",
@@ -40,7 +41,9 @@
     "@octokit/core": "4.0.5",
     "dotenv": "16.0.3",
     "@octokit/plugin-paginate-rest": "4.3.1",
-    "simple-git": "3.14.1"
+    "simple-git": "3.14.1",
+    "fast-glob": "3.2.12",
+    "semver": "7.3.8"
   },
   "prettier": {}
 }
