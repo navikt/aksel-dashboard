@@ -33,6 +33,8 @@ export const walkTs = async () => {
   await scanner.run({
     ...config,
     importedFrom: /@navikt\/ds-icons/,
-    processors: [["count-components", { outputTo: "out/icons.json" }]],
+    processors: [
+      ["count-components-and-props", { outputTo: "out/icons.json" }],
+    ],
   });
 };
