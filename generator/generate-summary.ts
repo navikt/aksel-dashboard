@@ -157,7 +157,7 @@ export const genSummary = async () => {
   const summary = createSummary(filterObj(raw, keys), filterObj(tags, keys));
 
   const res = {
-    elements: sortObj(filterObj(summary, htmlTags)),
+    elementer: sortObj(filterObj(summary, htmlTags)),
     react: sortObj(filterObj(summary, Object.keys(comp))),
     icons: sortObj(filterObj(summary, Object.keys(icons))),
   };

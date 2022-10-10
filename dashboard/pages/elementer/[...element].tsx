@@ -4,7 +4,7 @@ import { generatePaths } from "../../lib";
 import { fetcher } from "../../lib/fetcher";
 
 const Eksempel = ({ name }: { name: string }) => {
-  const { data, error } = useSWR(`/api/data/${name}`, fetcher);
+  const { data, error } = useSWR(`/api/data/elementer/${name}`, fetcher);
 
   if (error) return <Layout>failed to load {name}</Layout>;
   if (!data) return <Layout>loading...</Layout>;

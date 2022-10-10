@@ -16,7 +16,7 @@ export const generatePaths = (type: "element") => {
 
   switch (type) {
     case "element":
-      file.elements.forEach(({ name }: { name: string; val: any }) => {
+      file.elementer.forEach(({ name }: { name: string; val: any }) => {
         paths.push({ params: { element: [name] } });
       });
       break;
