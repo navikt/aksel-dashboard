@@ -1,44 +1,6 @@
 import { readJson, writeJson } from "./read-files.js";
 
-const filterObj = (obj: any, keys: string[]) => {
-  const data = { ...obj };
-  const res = Object.entries(data).reduce((newObj, [key, val]) => {
-    return keys.includes(key) || tags.includes(key)
-      ? { ...newObj, [key]: val }
-      : { ...newObj };
-  }, {});
-
-  return res;
-};
-
-const createSummary = (raw: any, tags: any) =>
-  Object.entries(raw).reduce((newObj, [key, val]: [key: string, val: any]) => {
-    return {
-      ...newObj,
-      [key]: {
-        uses: tags[key].instances,
-        instances: val?.instances,
-        props: tags[key].props,
-      },
-    };
-  }, {});
-
-export const genSummary = async () => {
-  const comp = await readJson("./out/components.json");
-  const icons = await readJson("./out/icons.json");
-  let raw = await readJson("./out/raw.json");
-  let tags = await readJson("./out/tags.json");
-
-  const keys = [...Object.keys(comp), ...Object.keys(icons)];
-
-  raw = filterObj(raw, keys);
-  tags = filterObj(tags, keys);
-  const res = createSummary(raw, tags);
-  await writeJson(res, "./out/summary.json");
-  return;
-};
-
-const tags = [
+const htmlTags = [
   "a",
   "abbr",
   "acronym",
@@ -155,3 +117,50 @@ const tags = [
   "video",
   "wbr",
 ];
+
+const filterObj = (obj: any, keys: string[]) => {
+  const data = { ...obj };
+  const res = Object.entries(data).reduce((newObj, [key, val]) => {
+    return keys.includes(key) ? { ...newObj, [key]: val } : { ...newObj };
+  }, {});
+
+  return res;
+};
+
+const createSummary = (raw: any, tags: any) =>
+  Object.entries(raw).reduce((newObj, [key, val]: [key: string, val: any]) => {
+    return {
+      ...newObj,
+      [key]: {
+        uses: tags[key].instances,
+        instances: val?.instances,
+        props: tags[key].props,
+      },
+    };
+  }, {});
+
+const sortObj = (obj: any) => {
+  return Object.entries(obj)
+    .reduce((cur, [key, val]) => [...cur, { name: key, val }], [] as any)
+    .sort((a: any, b: any) => (a.val.uses > b.val.uses ? -1 : 1));
+};
+
+/* Generates a more readable and iteratable summary */
+export const genSummary = async () => {
+  const comp = await readJson("./out/components.json");
+  const icons = await readJson("./out/icons.json");
+  let raw = await readJson("./out/raw.json");
+  let tags = await readJson("./out/tags.json");
+
+  const keys = [...Object.keys(comp), ...Object.keys(icons), ...htmlTags];
+
+  const summary = createSummary(filterObj(raw, keys), filterObj(tags, keys));
+
+  const res = {
+    elements: sortObj(filterObj(summary, htmlTags)),
+    react: sortObj(filterObj(summary, Object.keys(comp))),
+    icons: sortObj(filterObj(summary, Object.keys(icons))),
+  };
+
+  await writeJson(res, "./out/summary.json");
+};
