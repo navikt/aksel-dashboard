@@ -1,4 +1,5 @@
 import fglob from "fast-glob";
+import fs from "fs/promises";
 
 export const getDirs = () =>
   fglob(`repos/*`, {
@@ -13,30 +14,8 @@ export const getDirs = () =>
     return dirs;
   });
 
-const readTSJS = async () => {
-  const dirs = await getDirs();
-  const res = [];
+export const readJson = async (name: string): Promise<any> =>
+  fs.readFile(name).then((x) => JSON.parse(x.toString()));
 
-  for (const r of dirs) {
-    const files = await fglob(
-      [
-        `${r}/**/*.{tsx,jsx}`,
-        "!**/node_modules/**",
-        `!**/*.(spec|test|stories|story).*`,
-      ],
-      {
-        dot: true,
-        concurrency: 5,
-      }
-    );
-    res.push({ src: r, files });
-  }
-  return res;
-};
-
-export const readFiles = async () => {
-  const dirs = await getDirs();
-  console.log(`Directories: ${dirs.length}`);
-
-  return { ts: await readTSJS() };
-};
+export const writeJson = async (data: any, out: string) =>
+  fs.writeFile(out, JSON.stringify(data, null, 2));
