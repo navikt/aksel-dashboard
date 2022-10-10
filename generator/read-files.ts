@@ -18,4 +18,4 @@ export const readJson = async (name: string): Promise<any> =>
   fs.readFile(name).then((x) => JSON.parse(x.toString()));
 
 export const writeJson = async (data: any, out: string) =>
-  fs.writeFile(out, JSON.stringify(data, null, 2));
+  fs.writeFile(out, JSON.stringify(data));
