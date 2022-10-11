@@ -22,6 +22,14 @@ export default function handler(req, res) {
           props: Object.keys(x.val.props).length,
         }))
         .sort((a, b) => (a.uses > b.uses ? -1 : 1));
+    case "ikoner":
+      summary = file
+        .map((x) => ({
+          name: x.name,
+          uses: x.val.uses,
+          props: Object.keys(x.val.props).length,
+        }))
+        .sort((a, b) => (a.uses > b.uses ? -1 : 1));
     default:
       break;
   }

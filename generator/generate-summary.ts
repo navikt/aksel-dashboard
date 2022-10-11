@@ -148,13 +148,27 @@ const sortObj = (obj: any) => {
 /* Generates a more readable and iteratable summary */
 export const genSummary = async () => {
   const comp = await readJson("./out/components.json");
+  const compRaw = await readJson("./out/raw-comp.json");
   const icons = await readJson("./out/icons.json");
+  const iconsRaw = await readJson("./out/raw-icons.json");
+
   let raw = await readJson("./out/raw.json");
   let tags = await readJson("./out/tags.json");
 
-  const keys = [...Object.keys(comp), ...Object.keys(icons), ...htmlTags];
+  const summaryElements = createSummary(
+    filterObj(raw, [...htmlTags]),
+    filterObj(tags, [...htmlTags])
+  );
+  const summaryComp = createSummary(
+    filterObj(compRaw, [...Object.keys(comp)]),
+    filterObj(comp, [...Object.keys(comp)])
+  );
+  const summaryIcons = createSummary(
+    filterObj(iconsRaw, [...Object.keys(icons)]),
+    filterObj(icons, [...Object.keys(icons)])
+  );
 
-  const summary = createSummary(filterObj(raw, keys), filterObj(tags, keys));
+  const summary = { ...summaryElements, ...summaryComp, ...summaryIcons };
 
   const res = {
     elementer: sortObj(filterObj(summary, htmlTags)),

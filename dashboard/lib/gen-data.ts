@@ -10,7 +10,7 @@ export const getFile = () => {
   return summary;
 };
 
-export const generatePaths = (type: "element" | "komponenter") => {
+export const generatePaths = (type: "element" | "komponenter" | "ikoner") => {
   const file = getFile();
   const paths: any = [];
 
@@ -25,6 +25,14 @@ export const generatePaths = (type: "element" | "komponenter") => {
       break;
     case "komponenter":
       file.komponenter.forEach(({ name, val }: { name: string; val: any }) => {
+        paths.push({ params: { element: [name] } });
+        Object.keys(val.props)?.forEach((x) =>
+          paths.push({ params: { element: [name, x] } })
+        );
+      });
+      break;
+    case "ikoner":
+      file.ikoner.forEach(({ name, val }: { name: string; val: any }) => {
         paths.push({ params: { element: [name] } });
         Object.keys(val.props)?.forEach((x) =>
           paths.push({ params: { element: [name, x] } })

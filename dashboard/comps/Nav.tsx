@@ -25,9 +25,9 @@ export const Nav = () => {
       <Link href="/elementer" passHref>
         <a className={classN("elementer")}>Elementer</a>
       </Link>
-      {/* <Link href="#" passHref>
-        <a className={classN("Ikoner")}>Ikoner</a>
-      </Link> */}
+      <Link href="/ikoner" passHref>
+        <a className={classN("ikoner")}>Ikoner</a>
+      </Link>
     </div>
   );
 };

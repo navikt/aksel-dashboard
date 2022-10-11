@@ -28,6 +28,7 @@ export const walkTs = async () => {
     importedFrom: /@navikt\/ds-react/,
     processors: [
       ["count-components-and-props", { outputTo: "out/components.json" }],
+      ["raw-report", { outputTo: "out/raw-comp.json" }],
     ],
   });
   await scanner.run({
@@ -35,6 +36,7 @@ export const walkTs = async () => {
     importedFrom: /@navikt\/ds-icons/,
     processors: [
       ["count-components-and-props", { outputTo: "out/icons.json" }],
+      ["raw-report", { outputTo: "out/raw-icons.json" }],
     ],
   });
 };
