@@ -4,7 +4,7 @@ import { generatePaths } from "../../lib";
 
 const Eksempel = ({ ...props }) => <TagLayout {...(props as any)} />;
 
-export const getStaticPaths = async () => generatePaths("ikoner");
+export const getStaticPaths = async () => await generatePaths("ikoner");
 
 export async function getStaticProps({ params: { element } }) {
   return {
