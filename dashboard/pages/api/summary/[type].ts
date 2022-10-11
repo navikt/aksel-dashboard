@@ -1,7 +1,7 @@
 import { getFile } from "../../../lib";
 
-export default function handler(req, res) {
-  const file = getFile()[req.query.type];
+export default async function handler(req, res) {
+  const file = await getFile().then((x) => x[req.query.type]);
 
   let summary;
 

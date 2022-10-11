@@ -4,5 +4,5 @@
 
 body {
   color: white;
-  @apply bg-gray-900 min-h-screen;
+  @apply bg-gray-900 min-h-screen antialiased;
 }

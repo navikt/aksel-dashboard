@@ -118,6 +118,18 @@ const htmlTags = [
   "wbr",
 ];
 
+const getTimeStr = () => {
+  const date = new Date();
+
+  return (
+    `${date.getFullYear()}`.slice(2, 4) +
+    "-" +
+    ("00" + date.getMonth()).slice(-2) +
+    "-" +
+    ("00" + date.getDate()).slice(-2)
+  );
+};
+
 const filterObj = (obj: any, keys: string[]) => {
   const data = { ...obj };
   const res = Object.entries(data).reduce((newObj, [key, val]) => {
@@ -176,5 +188,5 @@ export const genSummary = async () => {
     ikoner: sortObj(filterObj(summary, Object.keys(icons))),
   };
 
-  await writeJson(res, "./out/summary.json");
+  await writeJson(res, `./out/summary-${getTimeStr()}.json`);
 };

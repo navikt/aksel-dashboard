@@ -53,7 +53,7 @@ export const searchForRepos = async () => {
       })
       .filter((x) => !x.disabled && !x.archived)
       /* Only use public repos when testing for safety */
-      .filter((x) => x.visibility === "public")
+      /* .filter((x) => x.visibility === "public") */
       .filter((x) => {
         if (!x.pushed_at) {
           return false;
