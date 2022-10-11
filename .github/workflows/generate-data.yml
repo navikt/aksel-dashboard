@@ -3,6 +3,9 @@ name: Generate data
 on:
   workflow_dispatch:
 
+env:
+  IMAGE: ghcr.io/${{ github.repository }}
+
 jobs:
   generator:
     runs-on: ubuntu-latest
@@ -32,7 +35,33 @@ jobs:
         run: yarn g:build
       - name: Run generator
         run: yarn g:run-f
-      - uses: actions/upload-artifact@v3
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@ab80d026d4753220c4243394c07c7d80f9638d06 # Use commit-sha1 instead of tag for security concerns
         with:
-          name: test-artifactor
-          path: generator/out/icons.json
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get complete tag
+        run: echo "TAG=$( date +%s )" >> $GITHUB_ENV
+      - name: Create docker image tags
+        run: echo "DOCKER_TAG=${{ env.IMAGE }}:${{ env.TAG }}" >> $GITHUB_ENV
+      - name: Build docker image
+        run: docker build -t ${{ env.DOCKER_TAG }} .
+      - name: Push docker image
+        run: |
+          docker push ${{ env.DOCKER_TAG }}
+      - name: Create tag and release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.TAG }}
+          release_name: ${{ env.TAG }}
+          commitish: ${{ github.sha }}
+      - name: Deploy to dev-gcp
+        uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          RESOURCE: nais-dev.yaml
+          CLUSTER: dev-gcp
+          IMAGE: ${{ env.DOCKER_TAG }}
