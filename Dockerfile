@@ -7,6 +7,7 @@ COPY dashboard/package.json .
 COPY dashboard/.next/ .next/
 # COPY dashboard/public/ public
 COPY dashboard/next.config.js .
+COPY dashboard/key.json .
 COPY node_modules/ node_modules/
 
 EXPOSE 3000
