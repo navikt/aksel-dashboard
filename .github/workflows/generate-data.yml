@@ -25,9 +25,6 @@ jobs:
       - name: install
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
-      - name: postinstall
-        if: steps.node-cache.outputs.cache-hit == 'true'
-        run: yarn postinstall
       - name: add tokens to .env
         run: |
           echo "TOKEN=${{ secrets.GITHUB_TOKEN }}" >> .env
