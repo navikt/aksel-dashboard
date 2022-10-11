@@ -19,9 +19,9 @@ export const Nav = () => {
       <Link href="/" passHref>
         <a className={classN("", true)}>Dashboard</a>
       </Link>
-      {/* <Link href="#" passHref>
+      <Link href="/komponenter" passHref>
         <a className={classN("komponenter")}>Komponenter</a>
-      </Link> */}
+      </Link>
       <Link href="/elementer" passHref>
         <a className={classN("elementer")}>Elementer</a>
       </Link>

@@ -2,6 +2,7 @@ import { getFile } from "../../../lib";
 
 export default function handler(req, res) {
   const file = getFile()[req.query.type];
+
   let summary;
 
   switch (req.query.type) {
@@ -13,8 +14,16 @@ export default function handler(req, res) {
           props: Object.keys(x.val.props).length,
         }))
         .sort((a, b) => a.name.localeCompare(b.name));
+    case "komponenter":
+      summary = file
+        .map((x) => ({
+          name: x.name,
+          uses: x.val.uses,
+          props: Object.keys(x.val.props).length,
+        }))
+        .sort((a, b) => (a.uses > b.uses ? -1 : 1));
     default:
-      res.status(404).json({});
+      break;
   }
-  res.status(200).json(summary ?? {});
+  res.status(200).json(summary ?? []);
 }

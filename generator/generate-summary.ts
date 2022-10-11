@@ -158,8 +158,8 @@ export const genSummary = async () => {
 
   const res = {
     elementer: sortObj(filterObj(summary, htmlTags)),
-    react: sortObj(filterObj(summary, Object.keys(comp))),
-    icons: sortObj(filterObj(summary, Object.keys(icons))),
+    komponenter: sortObj(filterObj(summary, Object.keys(comp))),
+    ikoner: sortObj(filterObj(summary, Object.keys(icons))),
   };
 
   await writeJson(res, "./out/summary.json");
