@@ -1,6 +1,6 @@
 # Aksel Dashboard
 
-Dashboard for tracking for hvordan Aksel sine løsninge blir brukt.
+Tracking av Aksel sine løsninger og bruk.
 
 ## Plan
 
