@@ -1,12 +1,11 @@
-import { NextPage } from "next";
+import ICONS from "@navikt/ds-icons/meta.json";
 import Link from "next/link";
 import useSWR from "swr";
 import { NeutralBar } from "../../comps/Bar";
 import { Layout } from "../../comps/Layout";
 import { fetcher } from "../../lib/fetcher";
-import ICONS from "@navikt/ds-icons/meta.json";
 
-const Eksempel: NextPage = ({ icons }: { icons: string[] }) => {
+const Eksempel = ({ icons }: { icons: string[] }) => {
   const { data, error } = useSWR(`/api/summary/ikoner`, fetcher);
 
   if (error) return <Layout>failed to load </Layout>;
