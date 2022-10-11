@@ -66,7 +66,6 @@ export const filterBasedOnPackage = async (
 
     const found = findDsDependency(jsonFiles);
     if (!found) {
-      console.log(`rm unwanted repo: ${opt.src}`);
       fsSync.rmSync(opt.src, { force: true, recursive: true });
     }
   }
