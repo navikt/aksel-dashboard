@@ -14,7 +14,15 @@ export const getFile = async () => {
 
   if (!summary && names?.[0]) {
     summary = readFileSync(`./data/${names[0]}`).toString();
-    summary = JSON.parse(summary);
+    try {
+      summary = JSON.parse(JSON.stringify(summary));
+    } catch (error) {
+      throw new Error(
+        `Failed parsing\n ${
+          (error as any)?.message
+        }\n Summary: ${!!summary} \n Names: ${names.join(" II ")}`
+      );
+    }
   }
 
   return summary;
