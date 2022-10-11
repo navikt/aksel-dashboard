@@ -3,7 +3,6 @@ import * as dotenv from "dotenv";
 import { cloneRepos } from "./clone-repos.js";
 import { filterRepos } from "./filter-repos.js";
 import { genSummary } from "./generate-summary.js";
-import { parseTs } from "./parse-ts.js";
 import { searchForRepos } from "./search-repos.js";
 import { walkTs } from "./walk-ts.js";
 dotenv.config({ path: "../.env" });
@@ -20,7 +19,7 @@ const main = async () => {
     await cloneRepos(repos);
     await filterRepos();
     await walkTs();
-    await parseTs();
+
     console.log(`Repos: ${repos.length}`);
   } else {
     console.log("Skipped cloning");

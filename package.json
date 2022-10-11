@@ -10,7 +10,7 @@
     "lint": "yarn workspace dashboard-website next lint",
     "clean": "cd generator && gts clean",
     "g:dev": "yarn clean && cd generator &&  tsc -w",
-    "g:build": "yarn clean && cd generator &&  tsc",
+    "g:build": "yarn clean && cd generator && tsc",
     "g:run": "cd generator && node  ./build/index.js",
     "g:run-f": "cd generator && FULL=true node --experimental-specifier-resolution=node ./build/index.js",
     "prepare": "husky install"

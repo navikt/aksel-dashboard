@@ -1,0 +1,38 @@
+name: Generate data
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Node-modules cache
+        uses: actions/cache@v3
+        id: node-cache
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: install
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: postinstall
+        if: steps.node-cache.outputs.cache-hit == 'true'
+        run: yarn postinstall
+      - name: add tokens to .env
+        run: |
+          echo "TOKEN=${{ secrets.GITHUB_TOKEN }}" >> .env
+      - name: Build generator
+        run: yarn g:build
+      - name: Run generator
+        run: yarn g:run-f
+      - uses: actions/upload-artifact@v3
+        with:
+          name: test-artifactor
+          path: generator/out/icons.json
