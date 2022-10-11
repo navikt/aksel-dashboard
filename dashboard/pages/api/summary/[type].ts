@@ -14,7 +14,7 @@ export default function handler(req, res) {
         }))
         .sort((a, b) => a.name.localeCompare(b.name));
     default:
-      break;
+      res.status(404).json({});
   }
   res.status(200).json(summary ?? {});
 }
