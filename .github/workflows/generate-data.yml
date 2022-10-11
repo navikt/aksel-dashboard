@@ -31,7 +31,14 @@ jobs:
       - name: add tokens to .env
         run: |
           echo "TOKEN=${{ secrets.GITHUB_TOKEN }}" >> .env
-          echo "${{ secrets.GCP_CREDENTIALS_DEV }}" >> ./dashboard/key.json
+
+      - name: create gcp key json
+        id: create-json
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "key.json"
+          json: ${{ secrets.GCP_CREDENTIALS_DEV }}
+          dir: "dashboard/"
       - name: Build generator
         run: yarn g:build
       - name: Run generator
