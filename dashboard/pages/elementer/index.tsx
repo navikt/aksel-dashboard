@@ -8,7 +8,10 @@ import { fetcher } from "../../lib/fetcher";
 const Eksempel: NextPage = () => {
   const { data, error } = useSWR(`/api/summary/elementer`, fetcher);
 
-  if (error) return <Layout>failed to load </Layout>;
+  if (error) {
+    console.log(error);
+    return <Layout>failed to load </Layout>;
+  }
   if (!data) return <Layout>loading...</Layout>;
 
   const mostUsed = [...data].sort((a, b) => (a.uses > b.uses ? -1 : 1))[0]
