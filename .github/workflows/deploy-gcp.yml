@@ -1,0 +1,71 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+
+env:
+  IMAGE: ghcr.io/${{ github.repository }}
+
+jobs:
+  generator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Node-modules cache
+        uses: actions/cache@v3
+        id: node-cache
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: install
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: add tokens to .env
+        run: |
+          echo "TOKEN=${{ secrets.GITHUB_TOKEN }}" >> .env
+
+      - name: create gcp key json
+        id: create-json
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "key.json"
+          json: ${{ secrets.GCP_CREDENTIALS_DEV }}
+          dir: "dashboard/"
+
+      - name: Build NEXT-app
+        run: yarn build
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@ab80d026d4753220c4243394c07c7d80f9638d06 # Use commit-sha1 instead of tag for security concerns
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get complete tag
+        run: echo "TAG=$( date +%s )" >> $GITHUB_ENV
+      - name: Create docker image tags
+        run: echo "DOCKER_TAG=${{ env.IMAGE }}:${{ env.TAG }}" >> $GITHUB_ENV
+      - name: Build docker image
+        run: docker build -t ${{ env.DOCKER_TAG }} .
+      - name: Push docker image
+        run: |
+          docker push ${{ env.DOCKER_TAG }}
+      - name: Create tag and release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.TAG }}
+          release_name: ${{ env.TAG }}
+          commitish: ${{ github.sha }}
+      - name: Deploy to dev-gcp
+        uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          RESOURCE: nais-dev.yaml
+          CLUSTER: dev-gcp
+          IMAGE: ${{ env.DOCKER_TAG }}
