@@ -5,8 +5,7 @@ metadata:
   namespace: designsystem
   labels:
     team: designsystem
-  annotations:
-    nais.io/read-only-file-system: "false"
+
 spec:
   image: {{ image }}
   port: 3000
