@@ -3,7 +3,7 @@ import { downloadFiles } from "./bucket";
 import fs from "fs";
 
 const getFileNames = () => {
-  return fs.readdirSync("./data/");
+  return fs.readdirSync("../tmp/");
 };
 
 export const getFile = async () => {
@@ -14,7 +14,7 @@ export const getFile = async () => {
 
   if (names?.[0]) {
     try {
-      const temp = readFileSync(`./data/${names[0]}`).toString();
+      const temp = readFileSync(`../tmp/${names[0]}`).toString();
       console.log("Read summary data");
       summary = JSON.parse(temp);
       console.log("Parsed summary data");
