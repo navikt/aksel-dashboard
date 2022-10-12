@@ -3,7 +3,6 @@ import Link from "next/link";
 import useSWR from "swr";
 import { NeutralBar } from "../../comps/Bar";
 import { Layout } from "../../comps/Layout";
-import { downloadFiles } from "../../lib/bucket";
 import { fetcher } from "../../lib/fetcher";
 
 const Eksempel = ({ icons }: { icons: string[] }) => {
@@ -67,7 +66,6 @@ const Eksempel = ({ icons }: { icons: string[] }) => {
 };
 
 export async function getStaticProps() {
-  await downloadFiles();
   return {
     props: {
       icons: ICONS.map((x) => x.name),

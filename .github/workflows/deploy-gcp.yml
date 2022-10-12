@@ -35,7 +35,7 @@ jobs:
         with:
           name: "key.json"
           json: ${{ secrets.GCP_CREDENTIALS_DEV }}
-          dir: "dashboard/"
+          dir: "/"
 
       - name: Build NEXT-app
         run: yarn build

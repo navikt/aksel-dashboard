@@ -1,5 +1,4 @@
 import { readFileSync } from "fs";
-import { downloadFiles } from "./bucket";
 import fs from "fs";
 
 const dirName = "./data/";
@@ -9,7 +8,6 @@ const getFileNames = () => {
 };
 
 export const getFile = async () => {
-  await downloadFiles();
   const names = getFileNames();
 
   let summary: any = null;
@@ -17,9 +15,7 @@ export const getFile = async () => {
   if (names?.[0]) {
     try {
       const temp = readFileSync(`${dirName}${names[0]}`).toString();
-      console.log("Read summary data");
       summary = JSON.parse(temp);
-      console.log("Parsed summary data");
     } catch (error) {
       throw new Error(
         `Failed parsing\n ${

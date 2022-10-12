@@ -3,13 +3,9 @@ import fs from "fs";
 
 const bucketName = "aksel-dashboard";
 
-const destFilename = "./data/";
+const destFilename = "./dashboard/data/";
 
-const serviceKey = "./key.json";
-
-const storageConf = { keyFilename: serviceKey };
-
-export const getDate = (name: string) =>
+export const getDate = (name) =>
   name
     .replace(".json", "")
     .replace("v1/out/summary-", "")
@@ -23,10 +19,11 @@ export async function downloadFiles() {
   const res = fs.readdirSync(destFilename);
 
   if (res.length > 0) {
+    console.log("Skipped bucket download");
     return;
   }
 
-  const storage = new Storage(storageConf);
+  const storage = new Storage({ keyFilename: "./key.json" });
 
   const [files] = await storage.bucket(bucketName).getFiles();
 
@@ -48,3 +45,5 @@ export async function downloadFiles() {
       destination: `${destFilename}${fresh.name.replace("v1/out/", "")}`,
     });
 }
+
+await downloadFiles();

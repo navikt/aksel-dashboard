@@ -1,14 +1,11 @@
 import { getFile } from "../../../lib";
-import { validate } from "../../../lib/validate-data";
 
 export default async function handler(req, res) {
-  /* const file = await getFile().then((x) => x[req.query.type]); */
+  const file = await getFile().then((x) => x[req.query.type]);
 
   let summary;
 
-  res.status(200).json({ val: validate() });
-
-  /* switch (req.query.type) {
+  switch (req.query.type) {
     case "elementer":
       summary = file
         .map((x) => ({
@@ -35,14 +32,6 @@ export default async function handler(req, res) {
         .sort((a, b) => (a.uses > b.uses ? -1 : 1));
     default:
       break;
-  } */
-  /* res.status(200).json(
-    {
-      val: validate(),
-      file: !!file,
-      l: Object?.keys?.(file),
-      l2: file?.length,
-      t: req.query.type,
-    } ?? []
-  ); */
+  }
+  res.status(200).json(summary ?? []);
 }

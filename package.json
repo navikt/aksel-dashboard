@@ -4,8 +4,9 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "yarn workspace dashboard-website next dev",
-    "build": "yarn workspace dashboard-website next build",
+    "dl": "node download.js",
+    "dev": "yarn dl && yarn workspace dashboard-website next dev",
+    "build": "yarn dl && yarn workspace dashboard-website next build",
     "start": "yarn workspace dashboard-website next start",
     "lint": "yarn workspace dashboard-website next lint",
     "clean": "cd generator && gts clean",
