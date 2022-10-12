@@ -14,9 +14,9 @@ export const getFile = async () => {
 
   if (!summary && names?.[0]) {
     try {
-      summary = readFileSync(`./data/${names[0]}`).toString();
+      const temp = readFileSync(`./data/${names[0]}`).toString();
       console.log("Read summary data");
-      summary = JSON.parse(summary);
+      summary = JSON.parse(temp);
       console.log("Parsed summary data");
     } catch (error) {
       throw new Error(
