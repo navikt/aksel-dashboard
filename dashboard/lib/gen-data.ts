@@ -2,8 +2,10 @@ import { readFileSync } from "fs";
 import { downloadFiles } from "./bucket";
 import fs from "fs";
 
+const dirName = "../tmp/dash-data/";
+
 const getFileNames = () => {
-  return fs.readdirSync("../tmp/");
+  return fs.readdirSync(dirName);
 };
 
 export const getFile = async () => {
@@ -14,7 +16,7 @@ export const getFile = async () => {
 
   if (names?.[0]) {
     try {
-      const temp = readFileSync(`../tmp/${names[0]}`).toString();
+      const temp = readFileSync(`${dirName}${names[0]}`).toString();
       console.log("Read summary data");
       summary = JSON.parse(temp);
       console.log("Parsed summary data");

@@ -3,7 +3,7 @@ import fs from "fs";
 
 const bucketName = "aksel-dashboard";
 
-const destFilename = "../tmp/";
+const destFilename = "../tmp/dash-data/";
 
 const serviceKey = "./key.json";
 
@@ -44,5 +44,7 @@ export async function downloadFiles() {
   await storage
     .bucket(bucketName)
     .file(fresh.name)
-    .download({ destination: `../tmp/${fresh.name.replace("v1/out/", "")}` });
+    .download({
+      destination: `${destFilename}${fresh.name.replace("v1/out/", "")}`,
+    });
 }

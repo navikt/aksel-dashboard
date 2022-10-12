@@ -1,11 +1,13 @@
 import fs, { readFileSync } from "fs";
 
+const dirName = "../tmp/dash-data/";
+
 export const validate = () => {
   let out = "";
   try {
-    const files = fs.readdirSync("../tmp/");
+    const files = fs.readdirSync(dirName);
     out += `${files.join("|")}\n`;
-    const data = readFileSync(`../tmp/${files[0]}`).toString();
+    const data = readFileSync(`${dirName}${files[0]}`).toString();
     out += `length: ${data.length}\n`;
     const parsed = JSON.parse(data);
     out += `parsed: ${!!parsed}\n`;
