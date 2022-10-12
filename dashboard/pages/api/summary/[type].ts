@@ -2,9 +2,11 @@ import { getFile } from "../../../lib";
 import { validate } from "../../../lib/validate-data";
 
 export default async function handler(req, res) {
-  const file = await getFile().then((x) => x[req.query.type]);
+  /* const file = await getFile().then((x) => x[req.query.type]); */
 
   let summary;
+
+  res.status(200).json({ val: validate() });
 
   /* switch (req.query.type) {
     case "elementer":
@@ -34,7 +36,7 @@ export default async function handler(req, res) {
     default:
       break;
   } */
-  res.status(200).json(
+  /* res.status(200).json(
     {
       val: validate(),
       file: !!file,
@@ -42,5 +44,5 @@ export default async function handler(req, res) {
       l2: file?.length,
       t: req.query.type,
     } ?? []
-  );
+  ); */
 }
