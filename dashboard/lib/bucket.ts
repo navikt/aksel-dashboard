@@ -3,7 +3,7 @@ import fs from "fs";
 
 const bucketName = "aksel-dashboard";
 
-const destFilename = "../tmp/dash-data/";
+const destFilename = "./data/";
 
 const serviceKey = "./key.json";
 

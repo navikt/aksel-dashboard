@@ -1,6 +1,6 @@
 import fs, { readFileSync } from "fs";
 
-const dirName = "../tmp/dash-data/";
+const dirName = "./data/";
 
 export const validate = () => {
   let out = "";

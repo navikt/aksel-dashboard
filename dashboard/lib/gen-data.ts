@@ -2,7 +2,7 @@ import { readFileSync } from "fs";
 import { downloadFiles } from "./bucket";
 import fs from "fs";
 
-const dirName = "../tmp/dash-data/";
+const dirName = "./data/";
 
 const getFileNames = () => {
   return fs.readdirSync(dirName);
