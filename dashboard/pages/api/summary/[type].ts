@@ -33,5 +33,12 @@ export default async function handler(req, res) {
     default:
       break;
   }
-  res.status(200).json(summary ?? []);
+  res.status(200).json(
+    {
+      file: !!file,
+      l: Object?.keys?.(file),
+      l2: file?.length,
+      t: req.query.type,
+    } ?? []
+  );
 }

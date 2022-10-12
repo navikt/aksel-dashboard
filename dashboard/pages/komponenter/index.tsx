@@ -14,6 +14,7 @@ const Eksempel: NextPage = () => {
   }
   if (!data) return <Layout>loading...</Layout>;
 
+  console.log(data);
   const mostUsed = [...data].sort((a, b) => (a.uses > b.uses ? -1 : 1))[0]
     ?.uses;
 

@@ -12,7 +12,7 @@ export const getFile = async () => {
 
   let summary: any = null;
 
-  if (!summary && names?.[0]) {
+  if (names?.[0]) {
     try {
       const temp = readFileSync(`./data/${names[0]}`).toString();
       console.log("Read summary data");
