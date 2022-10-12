@@ -87,6 +87,6 @@ jobs:
         uses: nais/deploy/actions/deploy@master
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          RESOURCE: nais-dev.yaml
-          CLUSTER: dev-gcp
+          RESOURCE: nais-prod.yaml
+          CLUSTER: prod-gcp
           IMAGE: ${{ env.DOCKER_TAG }}
