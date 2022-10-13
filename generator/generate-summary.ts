@@ -139,13 +139,16 @@ const filterObj = (obj: any, keys: string[]) => {
   return res;
 };
 
-const createSummary = (raw: any, tags: any) =>
+const createSummary = (raw: any, tags: any, noImports?: boolean) =>
   Object.entries(raw).reduce((newObj, [key, val]: [key: string, val: any]) => {
+    const filter =
+      noImports && val.instances.filter((x: any) => !x?.importInfo);
+
     return {
       ...newObj,
       [key]: {
-        uses: tags[key].instances,
-        instances: val?.instances,
+        uses: noImports ? filter.length : tags[key].instances,
+        instances: noImports ? filter : val?.instances,
         props: tags[key].props,
       },
     };
@@ -169,7 +172,8 @@ export const genSummary = async () => {
 
   const summaryElements = createSummary(
     filterObj(raw, [...htmlTags]),
-    filterObj(tags, [...htmlTags])
+    filterObj(tags, [...htmlTags]),
+    true
   );
   const summaryComp = createSummary(
     filterObj(compRaw, [...Object.keys(comp)]),
@@ -180,12 +184,10 @@ export const genSummary = async () => {
     filterObj(icons, [...Object.keys(icons)])
   );
 
-  const summary = { ...summaryElements, ...summaryComp, ...summaryIcons };
-
   const res = {
-    elementer: sortObj(filterObj(summary, htmlTags)),
-    komponenter: sortObj(filterObj(summary, Object.keys(comp))),
-    ikoner: sortObj(filterObj(summary, Object.keys(icons))),
+    elementer: sortObj(summaryElements),
+    komponenter: sortObj(summaryComp),
+    ikoner: sortObj(summaryIcons),
   };
 
   await writeJson(res, `./out/summary-${getTimeStr()}.json`);
