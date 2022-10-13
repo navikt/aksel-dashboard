@@ -144,7 +144,10 @@ const createSummary = (raw: any, tags: any, noImports?: boolean) =>
     const filter =
       noImports && val.instances.filter((x: any) => !x?.importInfo);
 
-    if (filter?.length === 0 || tags[key].instances) {
+    if (
+      (noImports && filter?.length === 0) ||
+      (!noImports && tags[key].instances)
+    ) {
       return { ...newObj };
     }
     return {
