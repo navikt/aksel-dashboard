@@ -142,11 +142,11 @@ const filterObj = (obj: any, keys: string[]) => {
 const createSummary = (raw: any, tags: any, noImports?: boolean) =>
   Object.entries(raw).reduce((newObj, [key, val]: [key: string, val: any]) => {
     const filter =
-      noImports && val.instances.filter((x: any) => !x?.importInfo);
+      noImports && val?.instances.filter((x: any) => !x?.importInfo);
 
     if (
       (noImports && filter?.length === 0) ||
-      (!noImports && tags[key].instances)
+      (!noImports && tags[key]?.instances === 0)
     ) {
       return { ...newObj };
     }
