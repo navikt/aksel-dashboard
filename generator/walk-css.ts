@@ -73,7 +73,9 @@ const parseCss = async (files: string[]) => {
 };
 
 export const walkCss = async () => {
-  const repos = await getDirs();
+  const repos = (await getDirs()).filter(
+    (x) => !x.includes("Designsystemet/@navikt")
+  );
 
   const res = [];
 
