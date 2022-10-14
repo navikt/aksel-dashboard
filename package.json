@@ -33,7 +33,8 @@
     "semver": "7.3.8",
     "ts-morph": "16.0.0",
     "react-scanner": "1.1.0",
-    "@dimanech/cssstat-core": "3.3.1"
+    "@dimanech/cssstat-core": "3.3.1",
+    "lodash": "4.17.21"
   },
   "workspaces": [
     "dashboard"

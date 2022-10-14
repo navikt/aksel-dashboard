@@ -172,6 +172,7 @@ export const genSummary = async () => {
   const compRaw = await readJson("./out/raw-comp.json");
   const icons = await readJson("./out/icons.json");
   const iconsRaw = await readJson("./out/raw-icons.json");
+  const css = await readJson("./out/css.json");
 
   let raw = await readJson("./out/raw.json");
   let tags = await readJson("./out/tags.json");
@@ -194,6 +195,7 @@ export const genSummary = async () => {
     elementer: sortObj(summaryElements),
     komponenter: sortObj(summaryComp),
     ikoner: sortObj(summaryIcons),
+    css,
   };
 
   await writeJson(res, `./out/summary-${getTimeStr()}.json`);

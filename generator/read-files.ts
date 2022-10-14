@@ -20,6 +20,9 @@ export const readJson = async (name: string): Promise<any> =>
 export const writeJson = async (data: any, out: string) =>
   fs.writeFile(out, JSON.stringify(data));
 
+export const readFile = async (file: string) =>
+  fs.readFile(file).then((x) => x.toString());
+
 export const getCss = (repo: string) =>
   fglob(`./${repo}/**/*.css`, {
     concurrency: 5,

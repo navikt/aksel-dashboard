@@ -20,14 +20,14 @@ const main = async () => {
     await cloneRepos(repos);
     await filterRepos();
     await walkTs();
+    await walkCss();
 
-    await genSummary();
     console.log(`Repos: ${repos.length}`);
   } else {
     console.log("Skipped cloning");
   }
 
-  await walkCss();
+  await genSummary();
 
   console.log("\nDone");
 };
