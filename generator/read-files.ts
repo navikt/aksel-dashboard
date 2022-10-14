@@ -19,3 +19,13 @@ export const readJson = async (name: string): Promise<any> =>
 
 export const writeJson = async (data: any, out: string) =>
   fs.writeFile(out, JSON.stringify(data));
+
+export const getCss = (repo: string) =>
+  fglob(`./${repo}/**/*.css`, {
+    concurrency: 5,
+  }).then((files) => {
+    if (files.length === 0) {
+      console.log(`Could not find any css in: ${repo}/**/*.{css}`);
+    }
+    return files;
+  });

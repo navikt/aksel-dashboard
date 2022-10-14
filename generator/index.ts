@@ -4,6 +4,7 @@ import { cloneRepos } from "./clone-repos.js";
 import { filterRepos } from "./filter-repos.js";
 import { genSummary } from "./generate-summary.js";
 import { searchForRepos } from "./search-repos.js";
+import { walkCss } from "./walk-css.js";
 import { walkTs } from "./walk-ts.js";
 dotenv.config({ path: "../.env" });
 
@@ -20,12 +21,13 @@ const main = async () => {
     await filterRepos();
     await walkTs();
 
+    await genSummary();
     console.log(`Repos: ${repos.length}`);
   } else {
     console.log("Skipped cloning");
   }
 
-  await genSummary();
+  await walkCss();
 
   console.log("\nDone");
 };
