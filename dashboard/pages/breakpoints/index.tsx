@@ -3,7 +3,7 @@ import { NeutralBar } from "../../comps/Bar";
 import { Layout } from "../../comps/Layout";
 import { fetcher } from "../../lib/fetcher";
 
-const template = ["448px", "648px", "960px"];
+const template = ["448px", "648px", "768px", "960px", "1272px"];
 
 const Eksempel = () => {
   const { data, error } = useSWR(`/api/breakpoints`, fetcher);
@@ -27,7 +27,7 @@ const Eksempel = () => {
                 className="grid gap-12 grid-cols-2 p-3 bg-gray-800 rounded "
               >
                 <span className="text-lg ">{`${x.val} ${
-                  template.includes(x.val) ? "(in DS-grid)" : ""
+                  template.includes(x.val) ? "(in figma grid)" : ""
                 }`}</span>
                 <div className="grid gap-1">
                   <span className="text-sm text-gray-400">{`${x.used} uses`}</span>
