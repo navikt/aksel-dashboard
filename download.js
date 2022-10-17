@@ -30,10 +30,11 @@ export async function downloadFiles() {
   const ordered = files
     .filter((x) => x.name !== "v1/out/" && x.name !== "v1/")
     .sort((a, b) => {
-      return (
-        new Date(getDate(b.name)).getTime() -
-        new Date(getDate(a.name)).getTime()
-      );
+      return new Date(getDate(a.name)).getTime() -
+        new Date(getDate(b.name)).getTime() >
+        0
+        ? 1
+        : -1;
     });
 
   const fresh = ordered[0];
