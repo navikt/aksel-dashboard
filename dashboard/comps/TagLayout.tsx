@@ -58,7 +58,7 @@ export const TagLayout = ({
           </div>
         )}
         <h2 className="text-xl mb-4">Files</h2>
-        <div className="grid gap-2 max-h-[1000px] overflow-scroll parent">
+        <div className="grid gap-2 max-h-[1000px] overflow-auto parent">
           {data?.val?.instances.slice(0, distance).map((x, y) => {
             const link = x.location.file.split("generator/repos/")[1];
             const [repo, ...rest] = link.split("/");
