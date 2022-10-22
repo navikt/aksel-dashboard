@@ -270,7 +270,7 @@ const Eksempel = () => {
               "bg-slate-700 text-slate-200": !filter,
             })}
           >
-            {`> 1`}
+            {`> 1 uses`}
           </button>
           <button
             onClick={() => setHex((x) => !x)}
@@ -288,21 +288,22 @@ const Eksempel = () => {
           .map((tag, y) => {
             return (
               <div key={y}>
-                <h2 className="text-xl mb-4">{`${tag.tag} (${tag.values.length})`}</h2>
+                <h2 className="text-xl mb-4">{`${tag.tag.replace(
+                  "bg",
+                  "background"
+                )} (${tag.values.length})`}</h2>
                 <div className="grid gap-2 mb-16">
                   {tag.values
                     .filter((x) => (filter ? x.uses > 1 : true))
                     .map((val) => (
                       <div
                         key={val.name}
-                        className="grid gap-12 grid-cols-2 p-3 bg-gray-800 rounded "
+                        className="grid gap-12 grid-cols-3 p-3 bg-gray-800 rounded "
                       >
-                        <span className="text-gray-400 text-md">
-                          {`${sanitizeName(val.name, hex)}`}
-                          <span className="text-gray-200">{` | ${
-                            val.uses
-                          }${findRef(val.name)}`}</span>
+                        <span className="text-gray-400 text-md flex justify-between">
+                          {`${sanitizeName(val.name, hex)}${findRef(val.name)}`}
                         </span>
+                        <span className="text-gray-200 text-end">{`${val.uses} uses`}</span>
 
                         <div
                           style={{ background: val.name }}
