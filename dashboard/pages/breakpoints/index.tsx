@@ -20,7 +20,6 @@ const Eksempel = () => {
         <h2 className="text-xl mb-4">{`${data.unique}`} unique breakpoints</h2>
         <div className="grid gap-2 mb-16">
           {data.breakpoints.map((x) => {
-            console.log(x);
             return (
               <div
                 key={x.val}
