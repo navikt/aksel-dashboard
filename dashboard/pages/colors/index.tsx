@@ -261,7 +261,7 @@ const Eksempel = () => {
               "bg-slate-700 text-slate-200": !summarize,
             })}
           >
-            No tokens
+            Concat tokens
           </button>
           <button
             onClick={() => setFilter((x) => !x)}

@@ -50,7 +50,7 @@ const Eksempel: NextPage = () => {
                     (x.overrides / x.uses) * 100
                   )}%)`}</span>
                   <DangerBar
-                    percentage={`${(x.overrides / mostOverriden) * 100}%`}
+                    percentage={`${Math.round((x.overrides / x.uses) * 100)}%`}
                   />
                 </div>
               </a>
