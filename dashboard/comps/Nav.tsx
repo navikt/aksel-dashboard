@@ -28,6 +28,9 @@ export const Nav = () => {
       <Link href="/ikoner" passHref>
         <a className={classN("ikoner")}>Ikoner</a>
       </Link>
+      <Link href="/colors" passHref>
+        <a className={classN("colors")}>Colors</a>
+      </Link>
       <Link href="/breakpoints" passHref>
         <a className={classN("breakpoints")}>Breakpoints</a>
       </Link>

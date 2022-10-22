@@ -12,9 +12,10 @@ const filterProp = (obj: any, prop: string) => {
 
 export default async function handler(req, res) {
   const file = await getFile().then((x) => x[req.query.name[0]]);
-  const prop = req.query.name?.[2];
+  let prop = req.query.name?.[2];
   const el = file.find((x) => x.name === req.query.name[1]);
 
+  prop === "classname" ? (prop = "className") : prop;
   const out = prop ? filterProp(el, prop) : el;
   res.status(200).json(out ?? []);
 }
