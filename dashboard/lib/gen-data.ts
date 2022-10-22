@@ -1,5 +1,6 @@
 import { readFileSync } from "fs";
 import fs from "fs";
+import { Convert, DataT } from "./types";
 
 const dirName = "./data/";
 
@@ -7,24 +8,22 @@ const getFileNames = () => {
   return fs.readdirSync(dirName);
 };
 
-export const getFile = async () => {
+export const getFile = async (): Promise<DataT> => {
   const names = getFileNames();
 
-  let summary: any = null;
+  let summary: DataT;
 
   if (names?.[0]) {
     try {
       const temp = readFileSync(`${dirName}${names[0]}`).toString();
-      summary = JSON.parse(temp);
+      summary = Convert.toDataT(temp);
+      return summary;
     } catch (error) {
-      throw new Error(
-        `Failed parsing\n ${
-          (error as any)?.message
-        }\n Summary: ${!!summary} \n Names: ${names.join(" II ")}`
-      );
+      throw new Error(`Failed parsing\n ${(error as any)?.message}`);
     }
+  } else {
+    throw new Error(`Could not get any file`);
   }
-  return summary;
 };
 
 export const generatePaths = async (

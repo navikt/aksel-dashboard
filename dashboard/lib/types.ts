@@ -5,71 +5,71 @@
 //   const dataT = Convert.toDataT(json);
 
 export interface DataT {
-  elementer?: Elementer[];
-  komponenter?: Komponenter[];
-  ikoner?: Ikoner[];
-  css?: CSS;
+  elementer: Elementer[];
+  komponenter: Komponenter[];
+  ikoner: Ikoner[];
+  css: CSS;
 }
 
-interface CSS {
-  mediaQueries?: string[];
-  selectors?: Selector[];
-  declarations?: { [key: string]: string[] };
+export interface CSS {
+  mediaQueries: string[];
+  selectors: Selector[];
+  declarations: { [key: string]: string[] };
 }
 
 interface Selector {
-  file?: string;
-  val?: string;
+  file: string;
+  val: string;
 }
 
-interface Elementer {
-  name?: string;
-  val?: ElementerVal;
+export interface Elementer {
+  name: string;
+  val: ElementerVal;
 }
 
 interface ElementerVal {
-  uses?: number;
-  instances?: PurpleInstance[];
-  props?: { [key: string]: number };
+  uses: number;
+  instances: PurpleInstance[];
+  props: { [key: string]: number };
 }
 
 interface PurpleInstance {
-  props?: { [key: string]: any };
-  propsSpread?: boolean;
-  location?: Location;
+  props: { [key: string]: any };
+  propsSpread: boolean;
+  location: Location;
 }
 
 interface Location {
-  file?: string;
-  start?: {
-    line?: number;
-    column?: number;
+  file: string;
+  start: {
+    line: number;
+    column: number;
   };
 }
 
-interface Ikoner {
-  name?: string;
-  val?: IkonerVal;
+export interface Ikoner {
+  name: string;
+  val: IkonerVal;
 }
 
 interface IkonerVal {
-  uses?: number;
-  instances?: FluffyInstance[];
-  props?: { [key: string]: number };
+  uses: number;
+  instances: FluffyInstance[];
+  props: { [key: string]: number };
 }
 
 interface FluffyInstance {
-  importInfo?: ImportInfo;
-  props?: { [key: string]: number };
-  propsSpread?: boolean;
-  location?: Location;
+  importInfo: ImportInfo;
+  props: { [key: string]: number };
+  propsSpread: boolean;
+  location: Location;
 }
 
 interface ImportInfo {
-  imported?: string;
-  local?: string;
-  moduleName?: ModuleName;
-  importType?: ImportType;
+  imported: string;
+  local: string;
+  moduleName: ModuleName;
+  importType: ImportType;
 }
 
 enum ImportType {
@@ -91,22 +91,22 @@ enum ModuleName {
   NaviktDsReactSrc = "@navikt/ds-react/src",
 }
 
-interface Komponenter {
-  name?: string;
-  val?: KomponenterVal;
+export interface Komponenter {
+  name: string;
+  val: KomponenterVal;
 }
 
 interface KomponenterVal {
-  uses?: number;
-  instances?: TentacledInstance[];
-  props?: { [key: string]: number };
+  uses: number;
+  instances: TentacledInstance[];
+  props: { [key: string]: number };
 }
 
 interface TentacledInstance {
-  importInfo?: ImportInfo;
-  props?: { [key: string]: number };
-  propsSpread?: boolean;
-  location?: Location;
+  importInfo: ImportInfo;
+  props: { [key: string]: number };
+  propsSpread: boolean;
+  location: Location;
 }
 
 // Converts JSON strings to/from your types
