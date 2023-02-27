@@ -10,7 +10,7 @@ export const cloneRepos = async (repos: RepoT[]) => {
   const git = simpleGit({
     baseDir: repoLocation,
     binary: "git",
-    maxConcurrentProcesses: 10,
+    maxConcurrentProcesses: 5,
   });
   console.log("Cloning repos");
   await Promise.all(

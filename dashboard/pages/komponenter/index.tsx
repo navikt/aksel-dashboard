@@ -32,7 +32,7 @@ const Eksempel: NextPage = () => {
           return (
             <Link key={x.name} href={`/komponenter/${x.name}`} passHref>
               <a className="grid gap-12 grid-cols-4 p-3 bg-gray-800 rounded hover:bg-gray-700">
-                <span className="text-lg ">{`<${x.name}>`}</span>
+                <span className="text-lg ">{`${x.name}`}</span>
                 <div className="grid gap-1">
                   <span className="text-sm text-gray-400">{`${x.uses} uses`}</span>
                   <NeutralBar percentage={`${(x.uses / mostUsed) * 100}%`} />

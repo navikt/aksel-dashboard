@@ -10,18 +10,22 @@ Tracking av Aksel sine løsninger og bruk.
 - [x] Laste ned repo
 - [x] Parse kode i repo
 - [x] Hente ut relevante datapunkter
-- [ ] Laste opp "rådata" til GCP-bucket
-- [ ] Manipulere rådata for visning i dashboard
-- [ ] Laste opp manipulert data til GCP-bucket
+- [x] Laste opp "rådata" til GCP-bucket
+- [x] Manipulere rådata for visning i dashboard
 
 ### App
 
-...
+- [ ] Oppsummere dashboard på forside, mest relevante data
+- [ ] Vise data over lengre tidsperiode
+- [ ] Oppdatere colors-side etter oppdatering av tokens
+- [ ] Oppdatere breakpoints side etter oppdatering av tokens
+- [ ] Hente data fra siteimprove/grafana over sider med komponenter
 
 ## Tokens
 
 .env på root
 
 ```
+// Må ha read access til repo og navikt SSO
 TOKEN=[git-token]
 ```

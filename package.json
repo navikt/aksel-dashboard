@@ -28,7 +28,7 @@
     "@octokit/core": "4.0.5",
     "dotenv": "16.0.3",
     "@octokit/plugin-paginate-rest": "4.3.1",
-    "simple-git": "3.14.1",
+    "simple-git": "3.16.1",
     "fast-glob": "3.2.12",
     "semver": "7.3.8",
     "ts-morph": "16.0.0",

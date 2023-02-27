@@ -124,7 +124,7 @@ const getTimeStr = () => {
   return (
     `${date.getFullYear()}`.slice(2, 4) +
     "-" +
-    ("00" + date.getMonth()).slice(-2) +
+    ("00" + (date.getMonth() + 1)).slice(-2) +
     "-" +
     ("00" + date.getDate()).slice(-2)
   );

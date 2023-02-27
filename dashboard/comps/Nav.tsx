@@ -16,9 +16,9 @@ export const Nav = () => {
 
   return (
     <div className="flex gap-2 mb-8">
-      <Link href="/" passHref>
+      {/* <Link href="/" passHref>
         <a className={classN("", true)}>Dashboard</a>
-      </Link>
+      </Link> */}
       <Link href="/komponenter" passHref>
         <a className={classN("komponenter")}>Komponenter</a>
       </Link>
