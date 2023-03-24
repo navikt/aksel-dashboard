@@ -11,7 +11,7 @@ export async function getStaticProps({ params: { element } }) {
     props: {
       type: "komponenter",
       name: element[0],
-      prop: element?.[1]?.toLowerCase() ?? null,
+      prop: element?.[1] ?? null,
     },
   };
 }

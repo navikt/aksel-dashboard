@@ -37,7 +37,7 @@ export const generatePaths = async (
       file.elementer.forEach(({ name, val }: { name: string; val: any }) => {
         paths.push({ params: { element: [name] } });
         Object.keys(val.props)?.forEach((x) =>
-          paths.push({ params: { element: [name, x.toLowerCase()] } })
+          paths.push({ params: { element: [name, x] } })
         );
       });
       break;
@@ -45,7 +45,7 @@ export const generatePaths = async (
       file.komponenter.forEach(({ name, val }: { name: string; val: any }) => {
         paths.push({ params: { element: [name] } });
         Object.keys(val.props)?.forEach((x) =>
-          paths.push({ params: { element: [name, x.toLowerCase()] } })
+          paths.push({ params: { element: [name, x] } })
         );
       });
       break;
@@ -53,7 +53,7 @@ export const generatePaths = async (
       file.ikoner.forEach(({ name, val }: { name: string; val: any }) => {
         paths.push({ params: { element: [name] } });
         Object.keys(val.props)?.forEach((x) =>
-          paths.push({ params: { element: [name, x.toLowerCase()] } })
+          paths.push({ params: { element: [name, x] } })
         );
       });
       break;

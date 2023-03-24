@@ -39,11 +39,7 @@ export const TagLayout = ({
           <div className="grid gap-2 mb-16">
             {Object.keys(data.val.props).map((x) => {
               return (
-                <Link
-                  href={`/${type}/${name}/${x.toLowerCase()}`}
-                  passHref
-                  key={x}
-                >
+                <Link href={`/${type}/${name}/${x}`} passHref key={x}>
                   <a className="grid grid-cols-1 p-3 bg-gray-800 rounded hover:bg-gray-700">
                     <div className="grid gap-1">
                       <span className="text-sm text-gray-400">{`"${x}" is used ${data.val.props[x]} times`}</span>
