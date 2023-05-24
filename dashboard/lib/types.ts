@@ -8,6 +8,7 @@ export interface DataT {
   elementer: Elementer[];
   komponenter: Komponenter[];
   ikoner: Ikoner[];
+  aksel_ikoner: Ikoner[];
   css: CSS;
 }
 

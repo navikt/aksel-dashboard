@@ -38,6 +38,15 @@ export default async function handler(req, res) {
         }))
         .sort((a, b) => (a.uses > b.uses ? -1 : 1));
       break;
+    case "aksel_ikoner":
+      summary = file
+        .map((x) => ({
+          name: x.name,
+          uses: x.val.uses,
+          props: Object.keys(x.val.props).length,
+        }))
+        .sort((a, b) => (a.uses > b.uses ? -1 : 1));
+      break;
     default:
       break;
   }

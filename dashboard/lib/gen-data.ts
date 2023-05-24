@@ -27,7 +27,7 @@ export const getFile = async (): Promise<DataT> => {
 };
 
 export const generatePaths = async (
-  type: "element" | "komponenter" | "ikoner"
+  type: "element" | "komponenter" | "ikoner" | "ds-icons"
 ) => {
   const file = await getFile();
   const paths: any = [];
@@ -49,8 +49,16 @@ export const generatePaths = async (
         );
       });
       break;
-    case "ikoner":
+    case "ds-icons":
       file.ikoner.forEach(({ name, val }: { name: string; val: any }) => {
+        paths.push({ params: { element: [name] } });
+        Object.keys(val.props)?.forEach((x) =>
+          paths.push({ params: { element: [name, x] } })
+        );
+      });
+      break;
+    case "ikoner":
+      file.aksel_ikoner.forEach(({ name, val }: { name: string; val: any }) => {
         paths.push({ params: { element: [name] } });
         Object.keys(val.props)?.forEach((x) =>
           paths.push({ params: { element: [name, x] } })

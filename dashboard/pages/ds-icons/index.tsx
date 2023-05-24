@@ -1,4 +1,4 @@
-import ICONS from "@navikt/aksel-icons/metadata";
+import ICONS from "@navikt/ds-icons/meta.json";
 import Link from "next/link";
 import useSWR from "swr";
 import { NeutralBar } from "../../comps/Bar";
@@ -6,7 +6,7 @@ import { Layout } from "../../comps/Layout";
 import { fetcher } from "../../lib/fetcher";
 
 const Eksempel = ({ icons }: { icons: string[] }) => {
-  const { data, error } = useSWR(`/api/summary/aksel-ikoner`, fetcher);
+  const { data, error } = useSWR(`/api/summary/ikoner`, fetcher);
 
   if (error) {
     console.log(error);
@@ -29,7 +29,7 @@ const Eksempel = ({ icons }: { icons: string[] }) => {
         <div className="grid gap-2 mb-16">
           {data.map((x) => {
             return (
-              <Link key={x.name} href={`/ikoner/${x.name}`} passHref>
+              <Link key={x.name} href={`/ds-icons/${x.name}`} passHref>
                 <a className="grid gap-12 grid-cols-3 p-3 bg-gray-800 rounded hover:bg-gray-700">
                   <span className="text-lg ">{`<${x.name}>`}</span>
                   <div className="grid gap-1">
@@ -68,7 +68,7 @@ const Eksempel = ({ icons }: { icons: string[] }) => {
 export async function getStaticProps() {
   return {
     props: {
-      icons: Object.keys(ICONS).map((x) => `${x}Icon`),
+      icons: ICONS.map((x) => x.name),
     },
   };
 }

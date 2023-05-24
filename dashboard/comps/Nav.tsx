@@ -28,6 +28,9 @@ export const Nav = () => {
       <Link href="/ikoner" passHref>
         <a className={classN("ikoner")}>Ikoner</a>
       </Link>
+      <Link href="/ds-icons" passHref>
+        <a className={classN("ds-icons")}>Gammel ikonpakke</a>
+      </Link>
       <Link href="/colors" passHref>
         <a className={classN("colors")}>Colors</a>
       </Link>
