@@ -170,8 +170,10 @@ const sortObj = (obj: any) => {
 export const genSummary = async () => {
   const comp = await readJson("./out/components.json");
   const compRaw = await readJson("./out/raw-comp.json");
-  const icons = await readJson("./out/icons.json");
-  const iconsRaw = await readJson("./out/raw-icons.json");
+  const oldIcons = await readJson("./out/icons.json");
+  const oldIconsRaw = await readJson("./out/raw-icons.json");
+  const icons = await readJson("./out/aksel-icons.json");
+  const iconsRaw = await readJson("./out/raw-aksel-icons.json");
   const css = await readJson("./out/css.json");
 
   let raw = await readJson("./out/raw.json");
@@ -186,6 +188,11 @@ export const genSummary = async () => {
     filterObj(compRaw, [...Object.keys(comp)]),
     filterObj(comp, [...Object.keys(comp)])
   );
+  const oldSummaryIcons = createSummary(
+    filterObj(iconsRaw, [...Object.keys(icons)]),
+    filterObj(icons, [...Object.keys(icons)])
+  );
+
   const summaryIcons = createSummary(
     filterObj(iconsRaw, [...Object.keys(icons)]),
     filterObj(icons, [...Object.keys(icons)])
@@ -194,7 +201,8 @@ export const genSummary = async () => {
   const res = {
     elementer: sortObj(summaryElements),
     komponenter: sortObj(summaryComp),
-    ikoner: sortObj(summaryIcons),
+    ikoner: sortObj(oldSummaryIcons),
+    aksel_ikoner: sortObj(summaryIcons),
     css,
   };
 

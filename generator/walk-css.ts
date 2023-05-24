@@ -73,9 +73,7 @@ const parseCss = async (files: string[]) => {
 };
 
 export const walkCss = async () => {
-  const repos = (await getDirs()).filter(
-    (x) => !x.includes("Designsystemet/@navikt")
-  );
+  const repos = (await getDirs()).filter((x) => !x.includes("aksel/@navikt"));
 
   const res = [];
 
@@ -91,7 +89,7 @@ export const walkCss = async () => {
     ...t,
     selectors: t.selectors.filter(
       (x: any) =>
-        !x.file.includes("Designsystemet/@navikt/core") &&
+        !x.file.includes("aksel/@navikt/core") &&
         !x.file.includes("build/static/css")
     ),
   };

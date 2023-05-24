@@ -39,4 +39,12 @@ export const walkTs = async () => {
       ["raw-report", { outputTo: "out/raw-icons.json" }],
     ],
   });
+  await scanner.run({
+    ...config,
+    importedFrom: /@navikt\/aksel-icons/,
+    processors: [
+      ["count-components-and-props", { outputTo: "out/aksel-icons.json" }],
+      ["raw-report", { outputTo: "out/raw-aksel-icons.json" }],
+    ],
+  });
 };
