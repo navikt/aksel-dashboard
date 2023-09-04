@@ -2,9 +2,6 @@ name: Generate data
 
 on:
   workflow_dispatch:
-  schedule:
-    # 01.00
-    - cron: "00 01 * * *"
 
 env:
   IMAGE: ghcr.io/${{ github.repository }}
@@ -12,6 +9,8 @@ env:
 jobs:
   generator:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
       - uses: actions/checkout@v3
         with:
